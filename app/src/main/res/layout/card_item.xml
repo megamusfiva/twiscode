@@ -1,24 +1,24 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="180dp"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="10dp"
-    android:elevation="10dp">
+    app:cardElevation="9dp"
+    app:cardCornerRadius="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/img_photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="160dp"
+            android:layout_height="130dp"
             android:contentDescription="@string/poster"
             android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
+            android:src="@drawable/dummy" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -32,30 +32,25 @@
                 android:textColor="@color/primary"
                 android:textSize="12sp"
                 tools:text="Nama Barang" />
-            <TextView
-                android:id="@+id/tv_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/secondary"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="Rp.000.000" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="13dp"
-                    android:layout_height="13dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_location_on_24"/>
                 <TextView
-                    android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/secondary"
                     android:textSize="12sp"
-                    tools:text="Kota asal" />
+                    android:textStyle="bold"
+                    android:text="@string/rp" />
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:text="000.000" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -65,7 +60,27 @@
                     android:layout_width="13dp"
                     android:layout_height="13dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_person_24"/>
+                    android:src="@drawable/ic_baseline_location_on_24"
+                    android:contentDescription="@string/kota_asal" />
+                <TextView
+                    android:id="@+id/tv_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey"
+                    android:textSize="12sp"
+                    tools:text="Kota asal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_person_24"
+                    android:contentDescription="@string/nama_user" />
                 <TextView
                     android:id="@+id/tv_user"
                     android:layout_width="wrap_content"
@@ -75,7 +90,7 @@
                     tools:text="Nama User" />
             </LinearLayout>
             <androidx.cardview.widget.CardView
-                android:id="@+id/btn_item"
+                android:id="@+id/cv_stock"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -85,16 +100,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="READY STOCK"
+                    android:text="@string/ready_stock"
                     android:textColor="@color/white"
-                    android:textSize="8sp" />
+                    android:textSize="8sp"
+                    tools:ignore="SmallSp" />
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </LinearLayout>
     <ImageView
+        android:id="@+id/iv_halal"
         android:layout_margin="20dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_halal_sign"/>
+        android:src="@drawable/ic_halal_sign"
+        android:contentDescription="@string/halal" />
 </androidx.cardview.widget.CardView>
