@@ -19,7 +19,7 @@
                 android:textColor="@color/primary"
                 android:layout_marginBottom="10dp"
                 android:textSize="18sp"
-                tools:text="Produk Yang Akan Dipesan" />
+                android:text="Produk Yang Akan Dipesan" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_cart"
                 android:layout_width="match_parent"
@@ -46,21 +46,34 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp">
                     <TextView
-                        android:id="@+id/tv_total"
+                        android:id="@+id/total_harga"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/primary"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:text="Total Harga" />
-                    <TextView
-                        android:layout_width="300dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/secondary"
-                        android:layout_below="@+id/tv_total"
-                        android:layout_marginTop="5dp"
-                        android:textSize="18sp"
-                        android:text="Rp.100.000" />
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/total_harga">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/secondary"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            android:text="@string/rp" />
+                        <TextView
+                            android:id="@+id/tv_total"
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/secondary"
+                            android:textSize="18sp"
+                            android:text="100.000" />
+                    </LinearLayout>
                     <Button
                         android:layout_width="100dp"
                         android:layout_height="60dp"
@@ -78,11 +91,4 @@
 
     </RelativeLayout>
 
-    <ProgressBar
-        android:id="@+id/pb_cart"
-        style="?android:attr/progressBarStyleInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="visible"/>
 </RelativeLayout>

@@ -9,4 +9,6 @@
     <string name="ready_stock">READY STOCK</string>
     <string name="nama_user">nama user</string>
     <string name="halal">halal</string>
+    <string name="cart">Cart</string>
+    <string name="_0">0</string>
 </resources>
