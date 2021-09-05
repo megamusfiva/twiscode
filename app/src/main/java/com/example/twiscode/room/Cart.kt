@@ -10,9 +10,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Cart(
 
-    @PrimaryKey
     @ColumnInfo(name = "id")
-    var id: Long? = null,
+    var id: String? = null,
 
     @ColumnInfo(name = "title")
     var title: String? = null,
@@ -22,7 +21,7 @@ data class Cart(
 
     @ColumnInfo(name = "weight")
     var weight: String? = null,
-
+    @PrimaryKey
     @ColumnInfo(name = "imgphoto")
     var imgPhoto: Int? = null,
 

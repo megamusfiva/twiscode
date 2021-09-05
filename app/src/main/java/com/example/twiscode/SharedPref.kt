@@ -12,4 +12,7 @@ class SharedPref (activity: Activity){
         sp = activity.getSharedPreferences(mypref, Context.MODE_PRIVATE)
     }
 
+    fun clear(){
+        sp.edit().clear().apply()
+    }
 }

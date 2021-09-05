@@ -25,6 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var tbMain: Toolbar
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
     var responses: ArrayList<Responses>? = null
     lateinit var myDb: MyDatabase
     lateinit var cart: Cart
-    lateinit var res: Responses
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         rvItem = findViewById(R.id.rv_item)
         rvItem.setHasFixedSize(true)
         myDb = MyDatabase.getInstance(this)!!
+
     }
 
     private fun getData() {
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity() {
                 response: Response<ArrayList<Responses>>
             ) {
                 pb_main.visibility = View.INVISIBLE
+                error_state.visibility = View.INVISIBLE
                 if (response.isSuccessful) {
                     responses = response.body()
                     val adapter = responses?.let {
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ArrayList<Responses>>, t: Throwable) {
                 pb_main.visibility = View.INVISIBLE
+                error_state.visibility = View.VISIBLE
                 Toast.makeText(this@MainActivity, "ERROR", Toast.LENGTH_LONG).show()
             }
         })
@@ -76,16 +79,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun insert() {
         CompositeDisposable().add(Observable.fromCallable { myDb.cartDao().insert(cart) }
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                checkKeranjang()
-                Log.d("respons", "data inserted")
-                Toast.makeText(this, "Berhasil menambah kekeranjang", Toast.LENGTH_SHORT).show()
-            })
-    }
-    private fun update(cart: Cart) {
-        CompositeDisposable().add(Observable.fromCallable { myDb.cartDao().update(cart) }
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -106,8 +99,21 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-        fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            cart= Cart()
+        fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id:Long) {
+            val res = responses?.get(position)
+            if (res != null) {
+                Responses(
+                    res.isHalal,
+                    res.isAvailable,
+                    res.weight,
+                    res.title,
+                    res.locationName,
+                    res.price,
+                    res.id,
+                    res.user
+                )
+            }
+            cart = Cart(res?.id, res?.title, res?.price,res?.weight)
             insert()
     }
 

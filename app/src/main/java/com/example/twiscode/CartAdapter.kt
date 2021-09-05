@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,7 +18,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.card_item.view.*
 
-class CartAdapter (var activity: Activity, var data: ArrayList<Cart>, var listener: Listeners) : RecyclerView.Adapter<CartAdapter.ListViewHolder>() {
+class CartAdapter (private var activity: Activity, private var data: ArrayList<Cart>, private var listener: Listeners) : RecyclerView.Adapter<CartAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): CartAdapter.ListViewHolder {
         val view: View =
@@ -32,8 +33,12 @@ class CartAdapter (var activity: Activity, var data: ArrayList<Cart>, var listen
         val harga = cart.price?.let { Integer.valueOf(it) }
         holder.tvName.text = cart.title
         holder.tvPrice.text = cart.price.toString()
-        holder.tvWeight.text = cart.weight
-
+        val weightt = cart.weight
+        if (weightt == "")
+            holder.lWeight.visibility = View.GONE
+        else
+            holder.lWeight.visibility = View.VISIBLE
+            holder.tvWeight.text =cart.weight
         Glide.with(holder.itemView.context)
             .load(R.drawable.dummy)
             .apply(RequestOptions().override(250, 250))
@@ -75,6 +80,7 @@ class CartAdapter (var activity: Activity, var data: ArrayList<Cart>, var listen
         val imgPhoto: ImageView = itemView.findViewById(R.id.img_photo)
         val btnKurang: ImageView = itemView.findViewById(R.id.btn_minus)
         val btnTambah: ImageView = itemView.findViewById(R.id.btn_add)
+        val lWeight: LinearLayout = itemView.findViewById(R.id.weight)
     }
     interface Listeners {
         fun onUpdate()

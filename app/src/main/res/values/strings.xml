@@ -11,4 +11,10 @@
     <string name="halal">halal</string>
     <string name="cart">Cart</string>
     <string name="_0">0</string>
+    <string name="_2">2</string>
+    <string name="name">Name</string>
+    <string name="_100_000">100.000</string>
+    <string name="baru">(Baru)</string>
+    <string name="kg">kg</string>
+    <string name="error">Terjadi Kesalahan Saat Pengambilan data, Coba Lagi</string>
 </resources>

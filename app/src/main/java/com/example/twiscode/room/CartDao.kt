@@ -18,10 +18,6 @@ interface CartDao {
     @Query("SELECT * from Cart ORDER BY id ASC")
     fun getAll(): List<Cart>
 
-    @Query("SELECT * FROM Cart WHERE id = :id LIMIT 1")
-    fun getProduk(id: Int?): Cart
-
-    @Transaction
     @Query("SELECT * FROM Cart WHERE id = :id")
-    fun getById(id: Long) : Cart
+    fun getProduk(id: String): Cart
 }

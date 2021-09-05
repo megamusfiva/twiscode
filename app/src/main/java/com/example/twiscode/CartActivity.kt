@@ -10,10 +10,10 @@ import com.example.twiscode.room.MyDatabase
 
 class CartActivity : AppCompatActivity() {
 
-    lateinit var myDb: MyDatabase
-    lateinit var s: SharedPref
-    lateinit var rvProduk: RecyclerView
-    lateinit var tvTotal: TextView
+    private lateinit var myDb: MyDatabase
+    private lateinit var s: SharedPref
+    private lateinit var rvProduk: RecyclerView
+    private lateinit var tvTotal: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,8 @@ class CartActivity : AppCompatActivity() {
         rvProduk = findViewById(R.id.rv_cart)
         tvTotal = findViewById(R.id.tv_total)
     }
-    lateinit var adapter: CartAdapter
-    var listProduk = ArrayList<Cart>()
+    private lateinit var adapter: CartAdapter
+    private var listProduk = ArrayList<Cart>()
 
     private fun displayProduk() {
         listProduk = myDb.cartDao().getAll() as ArrayList
@@ -33,19 +33,28 @@ class CartActivity : AppCompatActivity() {
 
         adapter = CartAdapter(this, listProduk, object : CartAdapter.Listeners {
             override fun onUpdate() {
-                //hitungTotal()
+                hitungTotal()
             }
         })
         rvProduk.adapter = adapter
         rvProduk.layoutManager = layoutManager
     }
 
-    var totalHarga = 0
+    private var totalHarga = 0
+    fun hitungTotal() {
+        val listProduk = myDb.cartDao().getAll() as ArrayList
+        totalHarga = 0
+        for (produk in listProduk) {
+            val harga = Integer.valueOf(produk.price)
+            totalHarga += (harga * produk.jumlah)
+        }
+        tvTotal.text = (totalHarga.toString())
 
+    }
 
     override fun onResume() {
         displayProduk()
-       // hitungTotal()
+        hitungTotal()
         super.onResume()
     }
 }
